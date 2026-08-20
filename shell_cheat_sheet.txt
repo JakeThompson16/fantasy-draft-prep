@@ -1,0 +1,36 @@
+DRAFT BOARD SHELL -- CHEAT SHEET
+
+board <position|all> [n] [--by vor|ex_value] [--all]
+  Top n players (default 15) for a position (QB/RB/WR/TE) or all
+  positions, sorted by vor (default) or ex_value. Excludes drafted
+  players unless --all is given.
+  example: board WR 10 --by ex_value
+
+cliffs
+  Reprint the positional scarcity/cliff table (top-30-by-vor per
+  position), excluding drafted players.
+  example: cliffs
+
+player <name>
+  Case-insensitive substring match on a player's name. Prints their
+  full row. Lists all matches instead of guessing if the query is
+  ambiguous.
+  example: player mccaffrey
+
+drafted <name>
+  Mark a player drafted -- excludes them from board/cliffs for the
+  rest of this session. In-memory only: not saved, not synced to
+  Sleeper.
+  example: drafted puka nacua
+
+undraft <name>
+  Reverse `drafted` for a player.
+  example: undraft puka nacua
+
+help
+  Show this cheat sheet.
+  example: help
+
+exit / quit
+  Leave the shell.
+  example: exit

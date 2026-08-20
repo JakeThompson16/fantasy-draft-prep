@@ -26,3 +26,26 @@ Given a Sleeper league, the tool:
 That replacement-level PPG is the baseline for evaluating draft picks: a
 player's real value is how far above replacement level they project, not
 their raw point total.
+
+## Boom/bust signal
+
+Beyond VOR, four independent per-position logistic regressions (QB/RB/WR/TE)
+flag players likely to beat their own replacement-level trajectory the
+following season. They're trained by retroactively applying this league's
+current scoring and roster rules to every season since 2019 (holding out
+the 2024→2025 transition for evaluation) on five features per player-season:
+prior-season VOR, TDs per game, years of experience, offensive snap share,
+and position-specific yards efficiency (yards/attempt, /carry, or /target).
+
+Held-out performance (Brier score / log loss, lower is better, vs. a naive
+constant-rate baseline):
+
+| Position | Brier (model / naive) | Log loss (model / naive) |
+|---|---|---|
+| QB | 0.170 / 0.209 | 0.500 / 0.610 |
+| RB | 0.110 / 0.119 | 0.376 / 0.407 |
+| WR | 0.160 / 0.179 | 0.483 / 0.546 |
+| TE | 0.096 / 0.096 | 0.341 / 0.345 |
+
+QB/RB/WR beat the baseline by a real margin; TE is roughly at parity, which
+tracks with TE having the thinnest positive-class sample of the four.

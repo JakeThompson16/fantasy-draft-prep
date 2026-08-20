@@ -176,7 +176,9 @@ def load_player_stats(seasons: int | list[int]) -> pl.DataFrame:
         seasons = [seasons]
 
     metadata_df = load_player_metadata(min(seasons) - 1)
-    stats_df = nfl.load_player_stats(seasons)
+    stats_df = nfl.load_player_stats(seasons).filter(
+        pl.col('season_type') == 'REG'
+    )
 
     df = stats_df.join(
         metadata_df,
